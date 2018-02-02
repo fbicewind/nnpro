@@ -1,0 +1,98 @@
+@media screen and (max-width: 992px) {
+    #resume-download {
+        display: none;
+    }
+
+    .validate-code {
+        width: 75px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .resume-blank {
+        background: none;
+        width: 0px;
+        height: 0px;
+    }
+
+    .resume-avatar {
+        border: 5px solid #fff;
+        width: 145px;
+        height: 190px;
+        position: absolute;
+        top: 30px;
+        left: 10px;
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    .resume-info-ul {
+        left: 170px;
+    }
+
+    .resume-big-right {
+        border: none;
+    }
+
+    .t-arrow-bottom {
+        left: 43%;
+    }
+
+    .t-arrow-top {
+        left: 57.5%;
+    }
+
+    .resume-skill-ul {
+        display: none;
+    }
+
+    .show-skill {
+        display: inline-block;
+    }
+
+    .album-big-div {
+        padding: 0 7px;
+    }
+
+    .album-img-title {
+        left: 8px;
+    }
+
+    .top-info-img {
+        float: none;
+    }
+
+    .top-info-div {
+        float: none;
+        padding-top: 0;
+        margin-left: 0;
+    }
+
+    .next-title {
+        text-align: left;
+    }
+
+    .emotion-right-panel {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .resume-avatar {
+        width: 122px;
+        height: 160px;
+        left: 5px;
+    }
+
+    .resume-info-ul {
+        left: 135px;
+    }
+
+    .fa.fa-envelope {
+        display: none;
+    }
+}
