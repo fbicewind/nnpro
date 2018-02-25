@@ -23,7 +23,7 @@
 			authentication-failure-url="/login/failure" default-target-url="/login/success"
 			username-parameter="username" password-parameter="password" />
 		<session-management
-			session-authentication-error-url="/u/1" invalid-session-url="/u/1">
+			session-authentication-error-url="/go" invalid-session-url="/go">
 			<!-- max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url 
 				session过期跳转界面 -->
 			<concurrency-control max-sessions="1"

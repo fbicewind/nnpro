@@ -18,8 +18,8 @@ public class MyPasswordEncode implements PasswordEncoder {
 
 	public static void main(String[] args) {
 		MyPasswordEncode aa = new MyPasswordEncode();
-		System.out.println(encoder.encode("test"));
-		System.out.println(aa.matches("test", encoder.encode("test")));
+		System.out.println(encoder.encode("admin"));
+		System.out.println(aa.matches("admin", encoder.encode("admin")));
 	}
 
 }

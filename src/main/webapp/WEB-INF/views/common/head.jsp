@@ -12,4 +12,6 @@
 <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <link rel="stylesheet" href="${path }/static/plugin/font-awaresome/css/font-awesome.min.css">
-<link rel="stylesheet" href="${path }/static/plugin/wangEditor/dist/css/wangEditor.min.css">
+<link rel="stylesheet" type="text/css" href="${path }/static/css/default.css">
+<link rel="stylesheet" type="text/css" href="${path }/static/css/fit.css">
+

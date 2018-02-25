@@ -1,5 +1,7 @@
 target/
+out/
 src/main/resources/config-pro.properties
+src/main/webapp/static/image/me.png
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
