@@ -43,7 +43,7 @@
 			                <ul class="dropdown-menu mymenu">
 								<%--<li><a href="#">博客设置</a></li>--%>
 								<%--<li><a href="#">消息记录</a></li>--%>
-								<li><a href="${path }/aboutMe/modifyPwd">修改密码</a></li>
+								<li><a href="${path }/aboutMeDo/modifyPwd">修改密码</a></li>
 								<li><a style="cursor: pointer;" onclick="_logout();">退&nbsp;&nbsp;出</a></li>
 							</ul>
 						</span>

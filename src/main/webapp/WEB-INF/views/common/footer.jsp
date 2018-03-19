@@ -12,3 +12,4 @@
 
 <%@ include file="login.jsp"%>
 <%@ include file="alert.jsp"%>
+<%@ include file="confirm.jsp"%>

@@ -2,6 +2,8 @@ package cn.nnnight.common;
 
 public class Constants {
 
+    public static final String WHOLE_USER_ID = "wholeId";
+
     public static final String YES = "Y";
     public static final String NO = "N";
     public static final String STRING_ZERO = "1";
@@ -10,4 +12,10 @@ public class Constants {
 
     public static final String SUCCESS = "success";
     public static final String FAILURE = "failure";
+
+    public static final String IS_SELF = "self";
+
+    public static final String NOW = "至今";
+
+    public static final String DEFAULT_COVER = "nocover.png";
 }

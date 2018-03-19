@@ -18,11 +18,11 @@ public class User {
     private Date registerTime;
     private String registerIp;
     private Date updateTime;
-    private java.sql.Date birthday;
+    private Date birthday;
     private String gender;
     private String email;
     private String mobile;
-    private String prefession;
+    private String profession;
     private String remark;
     private int articleCount;
     private int photoCount;
@@ -125,11 +125,11 @@ public class User {
     }
 
 
-    public java.sql.Date getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(java.sql.Date birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -160,15 +160,13 @@ public class User {
         this.mobile = mobile;
     }
 
-
-    public String getPrefession() {
-        return prefession;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setPrefession(String prefession) {
-        this.prefession = prefession;
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
-
 
     public String getRemark() {
         return remark;

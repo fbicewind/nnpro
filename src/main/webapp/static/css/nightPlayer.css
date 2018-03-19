@@ -145,7 +145,7 @@ ul {
 }
 
 .music-center-cover {
-	background-image: url(../image/music/0.jpg);
+	background-image: url(/static/upload/music/cover/0.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	border: 3px solid #eee;
