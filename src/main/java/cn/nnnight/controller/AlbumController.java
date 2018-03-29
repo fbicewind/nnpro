@@ -34,6 +34,7 @@ public class AlbumController {
         int userId = album.getUserId();
         mv.addObject(Constants.IS_SELF, AuthUtil.getUserId() == userId);
         mv.addObject("photoList", albumService.findPhotos(userId, albumId));
+        mv.addObject("albumId", albumId);
         session.setAttribute(Constants.WHOLE_USER_ID, userId);
         return mv;
     }

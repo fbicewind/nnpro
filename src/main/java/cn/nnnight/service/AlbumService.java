@@ -21,4 +21,10 @@ public interface AlbumService {
     public boolean savePhoto(int albumId, String fileName);
 
     public boolean deleteAlbum(int albumId);
+
+    public int getNextIndex(int albumId);
+
+    public boolean deletePhotos(List<String> ids);
+
+    public boolean setCover(List<String> ids);
 }

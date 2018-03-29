@@ -30,7 +30,7 @@
 										<li onclick="album.detail.delAlbum(${album.id})" <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;删除</li>
 									</ul>
 								</c:if>
-								<a href="${path }/album/detail/${album.id}"><img src="/static/upload/img/m/${album.coverImg }" class="full-width"></a>
+								<a href="${path }/album/detail/${album.id}"><img src="/static/upload/album/s/${album.coverImg }" class="full-width"></a>
 								<h3 class="album-photo-count photo-count-${album.id }">${album.photoCount }</h3>
 							</div>
 							<a href="#">${album.albumName }</a>

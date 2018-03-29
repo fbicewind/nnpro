@@ -46,19 +46,25 @@ var album = {
                 return;
             }
             if (i < fileArr.length) {
-                var albumData = new FormData();
-                albumData.append("albumId", toAlbumId);
-                albumData.append("photo", fileArr[i]);
-                $('.photo-to-upload').eq(i).append('<span class="this-uploading">上传中<i class="fa fa-spinner fa-pulse fa-fw margin-bottom"></i></span>');
-                $.when(album.detail.uploadDetail(albumData)).done(function (data, status) {
+                if(typeof(fileArr[i].tag) != 'undefined' && fileArr[i].tag == 1) {
                     i++;
-                    if (status == 1) {
-                        $('.this-uploading').text('已上传').addClass('this-uploaded').removeClass('this-uploading');
-                    } else {
-                        $('.this-uploading').text('上传失败').addClass('this-uploaded').removeClass('this-uploading');
-                    }
                     album.detail.uploadPhoto(i);
-                });
+                }else {
+                    var albumData = new FormData();
+                    albumData.append("albumId", toAlbumId);
+                    albumData.append("photo", fileArr[i]);
+                    $('.photo-to-upload').eq(i).append('<span class="this-uploading">上传中<i class="fa fa-spinner fa-pulse fa-fw margin-bottom"></i></span>');
+                    $.when(album.detail.uploadDetail(albumData)).done(function (data, status) {
+                        i++;
+                        if (status == 1) {
+                            albumData.get('photo').tag = 1;
+                            $('.this-uploading').text('已上传').addClass('this-uploaded').removeClass('this-uploading');
+                        } else {
+                            $('.this-uploading').text('上传失败').addClass('this-uploaded').removeClass('this-uploading');
+                        }
+                        album.detail.uploadPhoto(i);
+                    });
+                }
             } else {//全部上传完成，重新计算数量
                 $.ajax({
                     url: _path + '/album/getAlbum',

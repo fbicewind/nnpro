@@ -38,7 +38,7 @@ public class AlbumServiceImpl implements AlbumService {
             values.put("publicFlag", Constants.YES);
         }
         values.put("delFlag", Constants.NO);
-        return albumDao.findListByProperties(values, "createTime", true);
+        return albumDao.findListByProperties(values, "createTime", false);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class AlbumServiceImpl implements AlbumService {
         values.put("delFlag", Constants.NO);
         values.put("userId", userId);
         values.put("albumId", albumId);
-        return albumPhotoDao.findListByProperties(values, "createTime", true);
+        return albumPhotoDao.findListByProperties(values, "createTime", false);
     }
 
     @Override
@@ -135,6 +135,49 @@ public class AlbumServiceImpl implements AlbumService {
             flag = true;
         } catch (Exception e) {
             logger.error("Delete album error: ", e);
+        }
+        return flag;
+    }
+
+    @Override
+    public int getNextIndex(int albumId) {
+        Map<String, Object> values = new HashMap<>();
+        values.put("albumId", albumId);
+        values.put("delFlag", Constants.NO);
+        return albumPhotoDao.countByProperties(values);
+    }
+
+    @Override
+    public boolean deletePhotos(List<String> ids) {
+        boolean flag = false;
+        try {
+            Date now = new Date();
+            int userId = AuthUtil.getUserId();
+            for (String id : ids) {
+                AlbumPhoto photo = albumPhotoDao.get(id);
+                photo.setDelFlag(Constants.YES);
+                photo.setDeleteTime(now);
+                photo.setDeleteId(userId);
+                albumPhotoDao.update(photo);
+            }
+            flag = true;
+        } catch (Exception e) {
+            logger.error("Delete photo error: ", e);
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean setCover(List<String> ids) {
+        boolean flag = false;
+        try {
+            AlbumPhoto photo = albumPhotoDao.get(ids.get(0));
+            Album album = albumDao.get(photo.getAlbumId());
+            album.setCoverImg(photo.getPhoto());
+            albumDao.update(album);
+            flag = true;
+        } catch (Exception e) {
+            logger.error("Delete photo error: ", e);
         }
         return flag;
     }
