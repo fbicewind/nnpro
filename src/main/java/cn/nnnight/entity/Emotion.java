@@ -1,6 +1,9 @@
 package cn.nnnight.entity;
 
+import cn.nnnight.util.JsonDateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +14,7 @@ public class Emotion {
 
     private String id;
     private String emotion;
+    @DateTimeFormat
     private Date createTime;
     private int userId;
     private int praiseCount;
@@ -39,6 +43,7 @@ public class Emotion {
 
     @Column(name = "CREATE_TIME")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonSerialize(using = JsonDateTimeSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }

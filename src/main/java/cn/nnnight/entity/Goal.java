@@ -1,6 +1,9 @@
 package cn.nnnight.entity;
 
+import cn.nnnight.util.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,7 +16,9 @@ public class Goal {
     private int userId;
     private String goal;
     private String status;
+    @DateTimeFormat
     private Date startTime;
+    @DateTimeFormat
     private Date endTime;
     private String delFlag;
     private Date deleteTime;
@@ -58,6 +63,7 @@ public class Goal {
 
     @Column(name = "START_TIME")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getStartTime() {
         return startTime;
     }
@@ -68,6 +74,7 @@ public class Goal {
 
     @Column(name = "END_TIME")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getEndTime() {
         return endTime;
     }

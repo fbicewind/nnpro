@@ -153,13 +153,18 @@ public class AlbumServiceImpl implements AlbumService {
         try {
             Date now = new Date();
             int userId = AuthUtil.getUserId();
+            int albumId = 0;
             for (String id : ids) {
                 AlbumPhoto photo = albumPhotoDao.get(id);
                 photo.setDelFlag(Constants.YES);
                 photo.setDeleteTime(now);
                 photo.setDeleteId(userId);
                 albumPhotoDao.update(photo);
+                albumId = photo.getAlbumId();
             }
+            Album album = albumDao.get(albumId);
+            album.setPhotoCount(album.getPhotoCount() - ids.size());
+            albumDao.update(album);
             flag = true;
         } catch (Exception e) {
             logger.error("Delete photo error: ", e);
