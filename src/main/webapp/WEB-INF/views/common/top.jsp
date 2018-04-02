@@ -67,7 +67,7 @@
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav nav-ul">
                     <li class="nav-index"><a href="${path }/u/${wholeId }" class="navbar-li-a">主页</a></li>
-                    <li class="nav-blog"><a href="${path }/blog/${wholeId }" class="navbar-li-a">随笔</a></li>
+                    <li class="nav-blog"><a href="${path }/article/${wholeId }" class="navbar-li-a">随笔</a></li>
                     <li class="nav-mood"><a href="${path }/emotion/${wholeId}" class="navbar-li-a">碎语</a></li>
                     <li class="nav-album"><a href="${path }/album/${wholeId}" class="navbar-li-a">相册</a></li>
                     <!--

@@ -1,11 +1,13 @@
 package cn.nnnight.controller;
 
+import cn.nnnight.common.Constants;
 import cn.nnnight.common.Result;
 import cn.nnnight.entity.Album;
 import cn.nnnight.entity.User;
 import cn.nnnight.enums.Status;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.AlbumService;
+import cn.nnnight.service.ArticleService;
 import cn.nnnight.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class ValidateController {
     private UserService userService;
     @Autowired
     private AlbumService albumService;
+    @Autowired
+    private ArticleService articleService;
 
     @RequestMapping("/username")
     public Result username(@RequestParam String username) {
@@ -64,6 +68,17 @@ public class ValidateController {
             result.setCode(Status.SUCCESS.getCode());
         } else {
             result.setCode(Status.FAILURE.getCode());
+        }
+        return result;
+    }
+
+    @RequestMapping("/newType")
+    public Result newType(@RequestParam String typeName) {
+        Result result = new Result();
+        if (Constants.MY_BLOG_TYPE.equals(typeName)) {
+            result.setCode(Status.FAILURE.getCode());
+        } else {
+            result.setCode(articleService.isTypeExist(typeName) ? Status.SUCCESS.getCode() : Status.FAILURE.getCode());
         }
         return result;
     }

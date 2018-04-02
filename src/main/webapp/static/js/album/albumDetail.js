@@ -202,11 +202,16 @@ var albumDetail = {
                             $('.this-uploading').text('已上传').addClass('this-uploaded').removeClass('this-uploading');
                             var photoStr = '<div class="col-md-2 col-sm-3 col-xs-6 album-big-div">'
                                 + '<div class="album-img-div">'
+                                + '<div class="photo-check-cover"></div>'
+                                + '<input type="checkbox" class="photo-check" name="photocheck" value="' + data.data.id + '">'
+                                + '<input type="checkbox" class="photo-radio" name="photoradio" value="' + data.data.id + '">'
                                 + '<a class="album-img-a" onclick="albumDetail.detail.showFullImage(' + data.data.index + ')">'
                                 + '<img class="album-photo photo-' + data.data.index + '" data-src="' + data.data.photo
                                 + '" src="/static/upload/album/s/' + data.data.photo + '">'
                                 + '</a></div></div>';
                             $('.album-big-div:last-child').after(photoStr);
+                            albumDetail.detail.initSize();
+                            albumDetail.changeImgSize();
                         } else {
                             $('.this-uploading').text('上传失败').addClass('this-uploaded').removeClass('this-uploading');
                         }

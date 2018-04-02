@@ -8,6 +8,7 @@ import cn.nnnight.entity.AlbumPhoto;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.AlbumService;
 import cn.nnnight.vo.AlbumVo;
+import cn.nnnight.vo.NewPhotoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +24,7 @@ import java.util.Map;
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
-    public static final Logger logger = LoggerFactory.getLogger(MusicServiceImpl.class);
+    public static final Logger logger = LoggerFactory.getLogger(AlbumServiceImpl.class);
 
     @Autowired
     private AlbumDao albumDao;
@@ -88,24 +89,18 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public boolean savePhoto(int albumId, String fileName) {
-        boolean flag = false;
-        try {
-            AlbumPhoto entity = new AlbumPhoto();
-            entity.setAlbumId(albumId);
-            entity.setCreateTime(new Date());
-            entity.setPhoto(fileName);
-            entity.setUserId(AuthUtil.getUserId());
-            entity.setDelFlag(Constants.NO);
-            albumPhotoDao.save(entity);
-            Album album = albumDao.get(albumId);
-            album.setPhotoCount(album.getPhotoCount() + 1);
-            albumDao.update(album);
-            flag = true;
-        } catch (Exception e) {
-            logger.error("Save photo error: ", e);
-        }
-        return flag;
+    public AlbumPhoto savePhoto(int albumId, String fileName) {
+        AlbumPhoto entity = new AlbumPhoto();
+        entity.setAlbumId(albumId);
+        entity.setCreateTime(new Date());
+        entity.setPhoto(fileName);
+        entity.setUserId(AuthUtil.getUserId());
+        entity.setDelFlag(Constants.NO);
+        albumPhotoDao.save(entity);
+        Album album = albumDao.get(albumId);
+        album.setPhotoCount(album.getPhotoCount() + 1);
+        albumDao.update(album);
+        return entity;
     }
 
     @Override
@@ -186,4 +181,5 @@ public class AlbumServiceImpl implements AlbumService {
         }
         return flag;
     }
+
 }

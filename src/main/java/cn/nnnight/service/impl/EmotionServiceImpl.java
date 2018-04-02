@@ -18,7 +18,7 @@ import java.util.*;
 @Service
 public class EmotionServiceImpl implements EmotionService {
 
-    public static final Logger logger = LoggerFactory.getLogger(MusicServiceImpl.class);
+    public static final Logger logger = LoggerFactory.getLogger(EmotionServiceImpl.class);
 
     @Autowired
     private EmotionDao emotionDao;

@@ -18,4 +18,13 @@ public class Constants {
     public static final String NOW = "至今";
 
     public static final String DEFAULT_COVER = "nocover.png";
+
+    public static final String PRIVATEDIARY = "p";
+    public static final String DRAFTDIARY = "d";
+    public static final String FAVORABLEDIARY = "f";
+    public static final String MYDIARY = "a";
+
+    public static final String MY_BLOG_TYPE = "我的博客";
+
+
 }

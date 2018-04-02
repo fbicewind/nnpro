@@ -29,6 +29,10 @@ public class Article {
     private Date deleteTime;
     private int deleteId;
 
+    private String articleType;
+    private String favoriteFlag;
+    private String praiseFlag;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
@@ -219,4 +223,30 @@ public class Article {
         this.deleteId = deleteId;
     }
 
+    @Transient
+    public String getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(String articleType) {
+        this.articleType = articleType;
+    }
+
+    @Transient
+    public String getFavoriteFlag() {
+        return favoriteFlag;
+    }
+
+    public void setFavoriteFlag(String favoriteFlag) {
+        this.favoriteFlag = favoriteFlag;
+    }
+
+    @Transient
+    public String getPraiseFlag() {
+        return praiseFlag;
+    }
+
+    public void setPraiseFlag(String praiseFlag) {
+        this.praiseFlag = praiseFlag;
+    }
 }

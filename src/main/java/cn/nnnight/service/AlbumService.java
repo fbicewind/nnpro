@@ -3,6 +3,7 @@ package cn.nnnight.service;
 import cn.nnnight.entity.Album;
 import cn.nnnight.entity.AlbumPhoto;
 import cn.nnnight.vo.AlbumVo;
+import cn.nnnight.vo.NewPhotoVo;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface AlbumService {
 
     public boolean saveOrUpdateAlbum(AlbumVo vo);
 
-    public boolean savePhoto(int albumId, String fileName);
+    public AlbumPhoto savePhoto(int albumId, String fileName);
 
     public boolean deleteAlbum(int albumId);
 
@@ -27,4 +28,5 @@ public interface AlbumService {
     public boolean deletePhotos(List<String> ids);
 
     public boolean setCover(List<String> ids);
+
 }
