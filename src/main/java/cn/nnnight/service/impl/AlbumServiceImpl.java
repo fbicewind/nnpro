@@ -3,8 +3,10 @@ package cn.nnnight.service.impl;
 import cn.nnnight.common.Constants;
 import cn.nnnight.dao.AlbumDao;
 import cn.nnnight.dao.AlbumPhotoDao;
+import cn.nnnight.dao.UserDao;
 import cn.nnnight.entity.Album;
 import cn.nnnight.entity.AlbumPhoto;
+import cn.nnnight.entity.User;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.AlbumService;
 import cn.nnnight.vo.AlbumVo;
@@ -30,6 +32,8 @@ public class AlbumServiceImpl implements AlbumService {
     private AlbumDao albumDao;
     @Autowired
     private AlbumPhotoDao albumPhotoDao;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public List<Album> findAlbums(int userId) {
@@ -90,16 +94,20 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumPhoto savePhoto(int albumId, String fileName) {
+        int userId = AuthUtil.getUserId();
         AlbumPhoto entity = new AlbumPhoto();
         entity.setAlbumId(albumId);
         entity.setCreateTime(new Date());
         entity.setPhoto(fileName);
-        entity.setUserId(AuthUtil.getUserId());
+        entity.setUserId(userId);
         entity.setDelFlag(Constants.NO);
         albumPhotoDao.save(entity);
         Album album = albumDao.get(albumId);
         album.setPhotoCount(album.getPhotoCount() + 1);
         albumDao.update(album);
+        User user = userDao.get(userId);
+        user.setPhotoCount(user.getPhotoCount() + 1);
+        userDao.update(user);
         return entity;
     }
 
@@ -127,6 +135,9 @@ public class AlbumServiceImpl implements AlbumService {
                 photo.setDeleteTime(now);
                 albumPhotoDao.update(photo);
             }
+            User user = userDao.get(userId);
+            user.setPhotoCount(user.getPhotoCount() - album.getPhotoCount());
+            userDao.update(user);
             flag = true;
         } catch (Exception e) {
             logger.error("Delete album error: ", e);
@@ -160,6 +171,9 @@ public class AlbumServiceImpl implements AlbumService {
             Album album = albumDao.get(albumId);
             album.setPhotoCount(album.getPhotoCount() - ids.size());
             albumDao.update(album);
+            User user = userDao.get(userId);
+            user.setPhotoCount(user.getPhotoCount() - ids.size());
+            userDao.update(user);
             flag = true;
         } catch (Exception e) {
             logger.error("Delete photo error: ", e);

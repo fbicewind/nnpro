@@ -160,11 +160,6 @@ public class ArticleServiceImpl implements ArticleService {
             MyBeanUtils.copyProperties(vo, article);
             article.setCreateTime(now);
             article.setUpdateTime(now);
-            if (Constants.YES.equals(article.getPublicFlag()) && Constants.NO.equals(article.getDraftFlag())) {
-                User user = userDao.get(AuthUtil.getUserId());
-                user.setArticleCount(user.getArticleCount() + 1);
-                userDao.update(user);
-            }
         } else {
             article = articleDao.get(vo.getId());
             MyBeanUtils.copyProperties(vo, article);
@@ -173,6 +168,8 @@ public class ArticleServiceImpl implements ArticleService {
         article.setUserId(AuthUtil.getUserId());
         article.setDelFlag(Constants.NO);
         articleDao.saveOrUpdate(article);
+        int userId = AuthUtil.getUserId();
+        updateArticleCount(userId);
         return article;
     }
 
@@ -293,17 +290,44 @@ public class ArticleServiceImpl implements ArticleService {
                 article.setDeleteId(userId);
                 article.setDeleteTime(new Date());
                 articleDao.update(article);
-                if (Constants.YES.equals(article.getPublicFlag())) {
-                    User user = userDao.get(userId);
-                    user.setArticleCount(user.getArticleCount() - 1);
-                    userDao.update(user);
-                }
+                updateArticleCount(userId);
                 flag = true;
             }
         } catch (Exception e) {
             logger.error("Delete article error: ", e);
         }
         return flag;
+    }
+
+    @Override
+    public BlogAllVo getIndexInfo(int userId) {
+        BlogAllVo vo = new BlogAllVo();
+        vo.setUser(userDao.get(userId));
+        List<ArticleType> types = getUserArticleTypes(userId);
+        Map<Integer, String> typeMap = new HashMap<>();
+        for (ArticleType articleType : types) {
+            typeMap.put(articleType.getId(), articleType.getTypeName());
+        }
+        Map<String, Object> values = new HashMap<>();
+        values.put("recommendFlag", Constants.YES);
+        values.put("draftFlag", Constants.NO);
+        values.put("delFlag", Constants.NO);
+        values.put("publicFlag", Constants.YES);
+        values.put("userId", userId);
+        Pager<Article> articles = articleDao.selectPageByProterties(1, 20, values, "updateTime", true);
+        if (articles.getDatalist() != null) {
+            for (Article article : articles.getDatalist()) {
+                article.setArticleType(typeMap.get(article.getTypeId()));
+            }
+        }
+        vo.setArticles(articles);
+        values.clear();
+        values.put("delFlag", Constants.NO);
+        values.put("draftFlag", Constants.NO);
+        values.put("userId", userId);
+        values.put("publicFlag", Constants.YES);
+        vo.setNewArticles(articleDao.selectPageByProterties(1, 10, values, "createTime", true));
+        return vo;
     }
 
     private void setNewAndViewArticle(BlogAllVo vo, int userId) {
@@ -357,6 +381,17 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleType type = articleTypeDao.get(1);
         types.add(0, type);
         return types;
+    }
+
+    private void updateArticleCount(int userId) {
+        Map<String, Object> values = new HashMap<>();
+        values.put("delFlag", Constants.NO);
+        values.put("draftFlag", Constants.NO);
+        values.put("publicFlag", Constants.YES);
+        values.put("userId", userId);
+        User user = userDao.get(userId);
+        user.setArticleCount(articleDao.countByProperties(values));
+        userDao.update(user);
     }
 
 }

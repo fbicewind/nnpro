@@ -10,7 +10,7 @@
 	<%@ include file="common/top.jsp"%>
 	<div class="container">
 		<div class="resume-top-background">
-			<img class="resume-avatar" src="${path }/static/image/me.png">
+			<img class="resume-avatar" src="${photosrc }">
 			<span class="resume-blank"></span>
 			<ul class="resume-info-ul">
 				<li class="resume-name">冯斌</li>

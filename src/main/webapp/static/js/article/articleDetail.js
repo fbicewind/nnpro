@@ -4,6 +4,8 @@ var articleDetail = {
     },
     detail: {
         saveComment: function () {
+            _alert('提示','评论功能暂未开启');
+            return;
             var comment = $('#reply').val();
             if (comment == null || comment.replace(/(^\s+)|(\s+$)/g, "") == '') {
                 _alert('确认', '评论内容不能为空！');

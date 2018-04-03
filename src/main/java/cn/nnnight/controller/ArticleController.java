@@ -3,7 +3,6 @@ package cn.nnnight.controller;
 import cn.nnnight.common.Constants;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.ArticleService;
-import cn.nnnight.service.UserService;
 import cn.nnnight.util.IPUtil;
 import cn.nnnight.vo.BlogAllVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/article")
 public class ArticleController {
 
-    @Autowired
-    private UserService userService;
     @Autowired
     private ArticleService articleService;
 

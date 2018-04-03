@@ -28,4 +28,6 @@ public interface ArticleService {
     public boolean favoriteArticle(int articleId, int state);
 
     public boolean delArticle(int articleId);
+
+    public BlogAllVo getIndexInfo(int userId);
 }

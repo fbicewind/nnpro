@@ -4,6 +4,7 @@ import cn.nnnight.common.Constants;
 import cn.nnnight.common.Result;
 import cn.nnnight.enums.Status;
 import cn.nnnight.security.AuthUtil;
+import cn.nnnight.service.ArticleService;
 import cn.nnnight.service.UserService;
 import cn.nnnight.util.IPUtil;
 import cn.nnnight.vo.RegisterVo;
@@ -27,6 +28,8 @@ public class CommonController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * 进入系统时，如果已登入，进入自己主页，否则跳转至默认用户页
@@ -48,6 +51,9 @@ public class CommonController {
     @RequestMapping(value = "/u/{userId}", method = RequestMethod.GET)
     public ModelAndView index(@PathVariable("userId") int userId, HttpSession session) {
         ModelAndView mv = new ModelAndView("index");
+        mv.addObject("all", articleService.getIndexInfo(userId));
+        mv.addObject(Constants.IS_SELF, AuthUtil.getUserId() == userId);
+        session.setAttribute(Constants.WHOLE_USER_ID, userId);
         return mv;
     }
 
@@ -95,7 +101,7 @@ public class CommonController {
         vo.setRegisterIp(IPUtil.getRemoteIp(request));
         boolean flag = userService.addUser(vo);
         result.setCode(flag ? Status.SUCCESS.getCode() : Status.FAILURE.getCode());
-        if(flag){
+        if (flag) {
             result.setData(vo.getUsername());
         }
         return result;

@@ -29,17 +29,17 @@
 						</c:if>
 						<div class="three-count">
 							<div class="col-xs-4 text-center padding-0">
-								<a href="#">
+								<a href="${path}/article/${user.id}">
 									<span>文章<br>${user.articleCount }</span>
 								</a>
 							</div>
 							<div class="col-xs-4 text-center padding-0">
-								<a href="#">
+								<a href="${path}/album/${user.id}">
 									<span>照片<br>${user.photoCount }</span>
 								</a>
 							</div>
 							<div class="col-xs-4 text-center padding-0">
-								<a href="#">
+								<a href="${path}/music/${user.id}">
 									<span>音乐<br>${user.musicCount }</span>
 								</a>
 							</div>
@@ -48,7 +48,7 @@
 					<div class="col-xs-12 col-sm-8 col-md-10">
 						<h4>${user.nickname }</h4>
 						<div class="text-right modify-info">
-							<c:if test="${user.id == 1 }">
+							<c:if test="${user.id == 1 && isShow}">
 								<a href="${path }/aboutMe/resume">查看简历</a>
 							</c:if>
 							<c:if test="${self }">
@@ -115,7 +115,7 @@
 		$(function(){
 			$('.nav-about').addClass('active');
 		});
-		
+
 	</script>
 </body>
 </html>

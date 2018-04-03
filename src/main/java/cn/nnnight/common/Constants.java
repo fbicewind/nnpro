@@ -14,6 +14,7 @@ public class Constants {
     public static final String FAILURE = "failure";
 
     public static final String IS_SELF = "self";
+    public static final String SHOW_RESUME = "isShow";
 
     public static final String NOW = "至今";
 
