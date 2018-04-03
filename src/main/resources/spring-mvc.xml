@@ -28,7 +28,8 @@
         <property name="resolveLazily" value="true"/>
     </bean>
 
-    <context:property-placeholder location="classpath:config-dev.properties" ignore-unresolvable="true"/>
+    <!--<context:property-placeholder location="classpath:config-dev.properties" ignore-unresolvable="true"/>-->
+    <context:property-placeholder location="file:/opt/config/nnnight/config-pro.properties" ignore-unresolvable="true"/>
 
     <context:component-scan base-package="cn.nnnight.controller"/>
 </beans>

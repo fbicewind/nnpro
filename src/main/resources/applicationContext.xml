@@ -23,8 +23,8 @@
         <property name="locations">
             <list>
                 <!--配置与代码分离-->
-                <!--<value>file:/opt/config/nnnight/config-pro.properties</value>-->
-                <value>classpath:config-dev.properties</value>
+                <value>file:/opt/config/nnnight/config-pro.properties</value>
+                <!--<value>classpath:config-dev.properties</value>-->
             </list>
         </property>
     </bean>
