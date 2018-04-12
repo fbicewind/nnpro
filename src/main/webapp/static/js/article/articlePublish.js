@@ -23,7 +23,7 @@ var articlePublish = {
                     'fullscreen'];
             }
             editor.config.menuFixed = false;
-            editor.config.uploadImgUrl = _path + '/blogDo/upload';
+            editor.config.uploadImgUrl = _path + '/articleDo/upload';
             editor.config.uploadImgFileName = 'image';
             editor.config.hideLinkImg = true;
             editor.create();
