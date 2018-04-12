@@ -8,15 +8,22 @@ import cn.nnnight.entity.ArticleType;
 import cn.nnnight.enums.Status;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.ArticleService;
+import cn.nnnight.util.UploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/articleDo")
@@ -24,6 +31,8 @@ public class ArticleDoController {
 
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private UploadUtil uploadUtil;
 
     @RequestMapping(value = "/mark", method = RequestMethod.GET)
     public ModelAndView mark(@RequestParam(value = "articleId", defaultValue = "0") Integer articleId, HttpSession session) {
@@ -83,5 +92,26 @@ public class ArticleDoController {
         boolean flag = articleService.delArticle(articleId);
         result.setCode(flag ? Status.SUCCESS.getCode() : Status.FAILURE.getCode());
         return result;
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public void upload(@RequestParam("image") MultipartFile image, HttpServletRequest request,
+                       HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        // 文件类型限制
+        String[] allowedType = {"image/bmp", "image/gif", "image/jpeg", "image/png"};
+        boolean allowed = Arrays.asList(allowedType).contains(image.getContentType());
+        if (!allowed) {
+            response.getWriter().write("error|不支持的类型");
+            return;
+        }
+        // 图片大小限制
+        if (image.getSize() > 5 * 1024 * 1024) {
+            response.getWriter().write("error|图片大小不能超过5M");
+            return;
+        }
+        String returnPath = uploadUtil.uploadBlogImage(image);
+        response.getWriter().write(returnPath);
     }
 }
