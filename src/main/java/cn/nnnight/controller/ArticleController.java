@@ -4,13 +4,12 @@ import cn.nnnight.common.Constants;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.ArticleService;
 import cn.nnnight.util.IPUtil;
+import cn.nnnight.util.Pager;
+import cn.nnnight.vo.ArticleCommentVo;
 import cn.nnnight.vo.BlogAllVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +63,11 @@ public class ArticleController {
         } else {
             return type;
         }
+    }
 
+    @RequestMapping(value = "/getComments", method = RequestMethod.POST)
+    @ResponseBody
+    public Pager<ArticleCommentVo> getComments(@RequestParam int articleId, @RequestParam int pageNo) {
+        return articleService.getComments(articleId, pageNo);
     }
 }

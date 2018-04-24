@@ -124,12 +124,10 @@
                                     <li class="disabled"><a href="#">&lt;</a></li>
                                     <li class="active disabled"><a href="#">1</a></li>
                                     <li><a href="${path }/article/${all.userId}?n=2&t=${type}&i=${all.typeId}">2</a></li>
-                                    <li><a href="${path }/article/${all.userId}?n=2&t=${type}&i=${all.typeId}">&gt;</a>
-                                    </li>
+                                    <li><a href="${path }/article/${all.userId}?n=2&t=${type}&i=${all.typeId}">&gt;</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="${path }/article/${all.userId}?n=1&t=${type}&i=${all.typeId}">&lt;</a>
-                                    </li>
+                                    <li><a href="${path }/article/${all.userId}?n=1&t=${type}&i=${all.typeId}">&lt;</a></li>
                                     <li><a href="${path }/article/${all.userId}?n=1&t=${type}&i=${all.typeId}">1</a></li>
                                     <li class="disabled"><a href="#">2</a></li>
                                     <li class="disabled"><a href="#">&gt;</a></li>

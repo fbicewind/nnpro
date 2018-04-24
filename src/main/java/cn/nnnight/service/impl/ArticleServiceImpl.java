@@ -7,6 +7,7 @@ import cn.nnnight.security.AuthUtil;
 import cn.nnnight.service.ArticleService;
 import cn.nnnight.util.MyBeanUtils;
 import cn.nnnight.util.Pager;
+import cn.nnnight.vo.ArticleCommentVo;
 import cn.nnnight.vo.BlogAllVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -394,4 +393,29 @@ public class ArticleServiceImpl implements ArticleService {
         userDao.update(user);
     }
 
+    @Override
+    public Pager<ArticleCommentVo> getComments(int articleId, int pageNo) {
+        Map<String, Object> values = new HashMap<>();
+        values.put("delFlag", Constants.NO);
+        values.put("articleId", articleId);
+        Pager<ArticleComment> commentPager = articleCommentDao.selectPageByProterties(pageNo, 10, values, "createTime", false);
+        Pager<ArticleCommentVo> comments = new Pager<>();
+        BeanUtils.copyProperties(commentPager, comments);
+        List<ArticleCommentVo> voList = new ArrayList<>();
+        if(commentPager.getDatalist() != null && !commentPager.getDatalist().isEmpty()){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for(ArticleComment comment : commentPager.getDatalist()){
+                ArticleCommentVo vo = new ArticleCommentVo();
+                User user = userDao.get(comment.getUserId());
+                BeanUtils.copyProperties(comment, vo);
+                vo.setCommentId(comment.getId());
+                vo.setAvatar(user.getAvatar());
+                vo.setNickname(user.getNickname());
+                vo.setCreateTime(sdf.format(comment.getCreateTime()));
+                voList.add(vo);
+            }
+        }
+        comments.setDatalist(voList);
+        return comments;
+    }
 }

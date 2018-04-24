@@ -3,6 +3,8 @@ package cn.nnnight.service;
 import cn.nnnight.entity.Article;
 import cn.nnnight.entity.ArticleComment;
 import cn.nnnight.entity.ArticleType;
+import cn.nnnight.util.Pager;
+import cn.nnnight.vo.ArticleCommentVo;
 import cn.nnnight.vo.BlogAllVo;
 
 public interface ArticleService {
@@ -30,4 +32,6 @@ public interface ArticleService {
     public boolean delArticle(int articleId);
 
     public BlogAllVo getIndexInfo(int userId);
+
+    public Pager<ArticleCommentVo> getComments(int articleId, int pageNo);
 }

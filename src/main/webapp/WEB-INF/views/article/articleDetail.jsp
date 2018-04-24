@@ -103,72 +103,11 @@
 						</c:choose>
 					</div>
 				</div>
-				<hr class="hidden-sm hidden-xs">
-				<div class="article-visitor hidden-sm hidden-xs overflow-block">
-					<h5>本文最近访客</h5>
-					<c:if test="${visitors.datalist == null }">
-						<div>暂无访客..</div>
-					</c:if>
-					<c:choose>
-						<c:when test="${self }">
-							<c:forEach var="visitor" items="${visitors.datalist }">
-								<div class="col-sm-2 col-xs-4 relative-div ">
-									<a href="${path }/aboutMe/${visitor.userId}">
-										<i class="fa fa-remove visitor-remove" aria-hidden="true"></i>
-										<img src="/static/upload/img/m/${all.user.avatar }" class="full-width">
-										<div class="visitor-name">${visitor.nickname }</div>
-									</a>
-								</div>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="visitor" items="${visitors.datalist }">
-								<div class="col-sm-2 col-xs-4 relative-div ">
-									<a href="${path }/aboutMe/${visitor.userId}">
-										<img src="/static/upload/img/l/${all.user.avatar }" class="full-width">
-										<div class="visitor-name">${visitor.nickname }</div>
-									</a>
-								</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-					<!--
-					<span class="hover-pointer show-more-visitor">
-						<div>&nbsp;</div> 显示更多 <i class="fa fa-angle-double-down" aria-hidden="true"></i>
-					</span>
-					 -->
-				</div>
 				<hr>
 				<div class="article-comment">
-					<h5>评论(${comments.totalSize })</h5>
-					<ul class="blog-comment-ul">
-						<c:if test="${comments.totalSize == 0}">
-							<li style="text-align:center;">暂无评论...</li>
-						</c:if>
-						<c:forEach var="comment" items="${comments.datalist}" varStatus="status">
-							<li>
-								<div class="media">
-									<a class="pull-left text-center" href="#">
-										<img class="media-object" src="/static/upload/img/m/${all.user.avatar }">
-										<span>${comment.nickname }</span>
-									</a>
-									<div class="media-body">
-										<div>
-											<span style="margin-right:30px;">${status.index + comments.pageNo*10 - 9 }楼</span>
-											<span class="hidden-xs">
-												<fmt:formatDate value="${comment.createTime }" pattern="yyyy-MM-dd HH:mm:ss" />
-											</span>
-											<a href="javascript:void(0);" style="float:right;" onclick="articleDetail.detail.reply('${status.index + comments.pageNo*10 - 9}','${comment.nickname }','${comment.commentId }')">回复</a>
-											<span class="hover-pointer" style="float:right;margin-right:10px;">
-												<i class="fa fa-thumbs-o-up" aria-hidden="true" title="赞"></i>(${comment.praiseCount })
-											</span>
-										</div>
-										<c:out value="${comment.comment }" escapeXml="false"></c:out>
-									</div>
-								</div>
-							</li>
-						</c:forEach>
-					</ul>
+					<h5>评论(<span id="commentSize"></span>)</h5>
+					<ul class="blog-comment-ul"></ul>
+					<div class="text-center" id="commentPagination"></div>
 					<div style="margin-bottom:15px;">
 						<div id="replyTo">
 						<!-- 

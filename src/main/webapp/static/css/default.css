@@ -141,6 +141,10 @@ button:active {
     margin-right: 20px;
 }
 
+.margin-right-30 {
+    margin-right: 20px;
+}
+
 .margin-left-0 {
     margin-left: 0;
 }
@@ -191,10 +195,6 @@ button:active {
 
 .overflow-block {
     overflow: hidden;
-}
-
-.text-center {
-    text-align: center;
 }
 
 .logo-div {
@@ -1619,4 +1619,17 @@ label.error {
 .emotion-goal-span {
     display: inline-block;
     width: 42px;
+}
+
+.article-comment-span {
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+.pagination > li:first-child > a, .pagination > li:last-child > a {
+    border-radius: 0 !important;
+}
+
+.pagination-sm > li > a {
+    padding: 3px 8px;
 }
