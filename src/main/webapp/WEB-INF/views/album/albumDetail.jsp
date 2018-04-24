@@ -72,7 +72,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" class="form-horizontal" id="uploadPhotoForm" style="margin-top: 0;">
+                    <form role="form" class="form-horizontal margin-top-0" id="uploadPhotoForm">
                         <div class="photo-parent" id="addTarget">
                             <img src="${path }/static/image/add.png" class="photo-cover">
                             <input id="imgFiles" class="photo-file" type="file" name="img" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/png,image/bmp"/>

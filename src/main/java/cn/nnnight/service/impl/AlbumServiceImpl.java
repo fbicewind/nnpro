@@ -170,6 +170,14 @@ public class AlbumServiceImpl implements AlbumService {
             }
             Album album = albumDao.get(albumId);
             album.setPhotoCount(album.getPhotoCount() - ids.size());
+            Map<String, Object> values = new HashMap<>();
+            values.put("userId", userId);
+            values.put("delFlag", Constants.NO);
+            values.put("photo", album.getCoverImg());
+            List<AlbumPhoto> coverlist = albumPhotoDao.findListByProperties(values);
+            if (coverlist == null || coverlist.isEmpty()) {
+                album.setCoverImg(Constants.DEFAULT_COVER);
+            }
             albumDao.update(album);
             User user = userDao.get(userId);
             user.setPhotoCount(user.getPhotoCount() - ids.size());

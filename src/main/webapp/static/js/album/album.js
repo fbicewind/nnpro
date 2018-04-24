@@ -46,6 +46,7 @@ var album = {
                 return;
             }
             if (i < fileArr.length) {
+                _openProgress();
                 if(typeof(fileArr[i].tag) != 'undefined' && fileArr[i].tag == 1) {
                     i++;
                     album.detail.uploadPhoto(i);
@@ -74,6 +75,7 @@ var album = {
                     },
                     dataType: 'json',
                     success: function (result) {
+                        _closeProgress();
                         $('.photo-count-' + toAlbumId).text(result.photoCount);
                     }
                 });

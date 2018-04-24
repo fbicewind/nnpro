@@ -8,8 +8,8 @@
 </head>
 <body>
 	<%@ include file="../common/top.jsp"%>
-	<div class="container" style="min-height: 200px;">
-		<div class="full-width overflow-block" style="padding: 40px 30px;">
+	<div class="container article-top-container">
+		<div class="full-width overflow-block article-top-div">
 			<img src="/static/upload/img/l/${all.user.avatar }" class="top-info-img">
 			<div class="top-info-div">
 				<h2>${all.user.nickname }</h2>
@@ -18,11 +18,13 @@
 		</div>
 	</div>
 
-	<div class="container" style="min-height: 400px;; margin-bottom: 40px;">
-		<div class="col-sm-8 col-xs-12">
+	<div class="container index-container">
+		<div class="col-sm-8 col-xs-12" id="articleWindow">
 			<div class="full-width overflow-block article-detail">
 				<div class="article-detail-top">
-					<span class="article-type">${all.article.articleType }</span>
+					<i class="fa fa-window-maximize article-max" aria-hidden="true" id="articleMax"></i>
+					<i class="fa fa-window-minimize article-min" aria-hidden="true" id="articleMin"></i>
+					&nbsp;&nbsp;<span class="article-type">${all.article.articleType }</span>
 					<a class="article-return" href="${path }/article/${all.userId}?t=${all.diaryType }&i=${all.isType}"><i class="fa fa-reply" aria-hidden="true"></i>&nbsp;返回日志列表</a>
 				</div>
 				<h3 class="article-title">${all.article.title }</h3>
@@ -102,7 +104,7 @@
 					</div>
 				</div>
 				<hr class="hidden-sm hidden-xs">
-				<div class="article-visitor hidden-sm hidden-xs" style="overflow: hidden;">
+				<div class="article-visitor hidden-sm hidden-xs overflow-block">
 					<h5>本文最近访客</h5>
 					<c:if test="${visitors.datalist == null }">
 						<div>暂无访客..</div>
@@ -183,8 +185,8 @@
 			</div>
 		</div>
 
-		<div class="col-sm-4 col-xs-12">
-			<div class="index-right-block" style="margin-top: 0px;">
+		<div class="col-sm-4 col-xs-12" id="otherWindow">
+			<div class="index-right-block margin-top-0">
 				<span>日志分类</span>
 				<ul class="last-blog">
 					<c:forEach var="type" items="${all.types }">
@@ -192,7 +194,7 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="index-right-block" style="margin-top: 35px;">
+			<div class="index-right-block margin-top-35">
 				<span>最近日志</span>
 				<ul class="last-blog">
 					<c:if test="${all.newArticles.datalist == null }">
@@ -203,7 +205,7 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="index-right-block" style="margin-top: 35px;">
+			<div class="index-right-block margin-top-35">
 				<span>大家在看</span>
 				<ul class="last-blog">
 					<c:if test="${all.viewArticles.datalist == null }">
@@ -225,6 +227,7 @@
 		var _blogId = '${all.article.id}';
 		$(function(){
 			$('.nav-blog').addClass('active');
+            articleDetail.init();
 		});
 	</script>
 </body>

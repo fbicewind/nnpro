@@ -1,23 +1,30 @@
 package cn.nnnight.service.impl;
 
 import cn.nnnight.common.Constants;
+import cn.nnnight.dao.BlogVisitorDao;
 import cn.nnnight.dao.ResumeWorkExperienceDao;
 import cn.nnnight.dao.UserDao;
+import cn.nnnight.dao.UserLoginHistoryDao;
+import cn.nnnight.entity.BlogVisitor;
 import cn.nnnight.entity.ResumeWorkExperience;
 import cn.nnnight.entity.User;
+import cn.nnnight.entity.UserLoginHistory;
 import cn.nnnight.security.AuthUtil;
 import cn.nnnight.security.CustomUser;
 import cn.nnnight.security.MyPasswordEncode;
 import cn.nnnight.service.UserService;
 import cn.nnnight.vo.RegisterVo;
 import cn.nnnight.vo.WorkExperienceVo;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.context.ContextLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,6 +38,10 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Autowired
     private ResumeWorkExperienceDao resumeWorkExperienceDao;
+    @Autowired
+    private BlogVisitorDao blogVisitorDao;
+    @Autowired
+    private UserLoginHistoryDao userLoginHistoryDao;
 
     @Override
     public User getUserByUserId(int userId) {
@@ -162,4 +173,56 @@ public class UserServiceImpl implements UserService {
         }
         return vos;
     }
+
+    @Override
+    public void addVisitHistory(String ip, int userId) {
+        Runnable historyThread = () -> {
+            Date now = new Date();
+            SessionFactory sessionFactory = (SessionFactory) ContextLoader.getCurrentWebApplicationContext().getBean("sessionFactory");
+            Session session = sessionFactory.openSession();
+            Transaction tran = session.beginTransaction();
+            Map<String, Object> values = new HashMap<>();
+            values.put("ip", ip);
+            values.put("userId", userId);
+            values.put("date", new Date(now.getTime() - 300000));
+            if (!blogVisitorDao.hasVisitors(values, session)){
+                BlogVisitor blogVisitor = new BlogVisitor();
+                blogVisitor.setCreateTime(now);
+                blogVisitor.setIpAddress(ip);
+                blogVisitor.setUserId(userId);
+                session.save(blogVisitor);
+            }
+            session.flush();
+            tran.commit();
+            session.close();
+        };
+        new Thread(historyThread).start();
+    }
+
+    @Override
+    public void addLoginHistory(String ip, int userId, String status) {
+        new Thread(() -> {
+            Date now = new Date();
+            SessionFactory sessionFactory = (SessionFactory) ContextLoader.getCurrentWebApplicationContext().getBean("sessionFactory");
+            Session session = sessionFactory.openSession();
+            Transaction tran = session.beginTransaction();
+            Map<String, Object> values = new HashMap<>();
+            values.put("ip", ip);
+            values.put("userId", userId);
+            values.put("status", status);
+            values.put("date", new Date(now.getTime() - 10000));
+            if (!userLoginHistoryDao.hasLogin(values, session)){
+                UserLoginHistory loginHistory = new UserLoginHistory();
+                loginHistory.setLoginIp(ip);
+                loginHistory.setLoginTime(now);
+                loginHistory.setUserId(userId);
+                loginHistory.setLoginStatus(status);
+                session.save(loginHistory);
+            }
+            session.flush();
+            tran.commit();
+            session.close();
+        }).start();
+    }
+
 }

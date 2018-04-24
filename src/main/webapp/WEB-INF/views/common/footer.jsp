@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container footer-bar">
-    <span>新夜网 重构版 v2018-04-03  Design by FengBin <a href="http://www.miitbeian.gov.cn/">浙ICP备17005421号</a></span>
+    <span>新夜网 重构版 v2018-04-24  Design by FengBin <a href="http://www.miitbeian.gov.cn/">浙ICP备17005421号</a></span>
 </div>
 
 <script src="${path }/static/js/jquery-1.12.3.min.js"></script>
@@ -13,3 +13,4 @@
 <%@ include file="login.jsp"%>
 <%@ include file="alert.jsp"%>
 <%@ include file="confirm.jsp"%>
+<%@ include file="cover.jsp"%>

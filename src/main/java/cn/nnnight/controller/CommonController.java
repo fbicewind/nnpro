@@ -49,8 +49,9 @@ public class CommonController {
      * @return
      */
     @RequestMapping(value = "/u/{userId}", method = RequestMethod.GET)
-    public ModelAndView index(@PathVariable("userId") int userId, HttpSession session) {
+    public ModelAndView index(@PathVariable("userId") int userId, HttpSession session, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("index");
+        userService.addVisitHistory(IPUtil.getRemoteIp(request), userId);
         mv.addObject("all", articleService.getIndexInfo(userId));
         mv.addObject(Constants.IS_SELF, AuthUtil.getUserId() == userId);
         session.setAttribute(Constants.WHOLE_USER_ID, userId);
@@ -70,7 +71,8 @@ public class CommonController {
      */
     @RequestMapping(value = "/login/{status}")
     @ResponseBody
-    public Result doLogin(@PathVariable String status) {
+    public Result doLogin(@PathVariable String status, HttpServletRequest request) {
+        userService.addLoginHistory(IPUtil.getRemoteIp(request), AuthUtil.getUserId(), status);
         Result result = new Result();
         result.setCode(Constants.SUCCESS.equals(status) ? Status.SUCCESS.getCode() : Status.FAILURE.getCode());
         return result;

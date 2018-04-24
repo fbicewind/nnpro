@@ -118,11 +118,27 @@ button:active {
 }
 
 .margin-bottom-0 {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom-40 {
+    margin-bottom: 40px;
 }
 
 .margin-right-0 {
     margin-right: 0;
+}
+
+.margin-right-5 {
+    margin-right: 5px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
 }
 
 .margin-left-0 {
@@ -130,7 +146,7 @@ button:active {
 }
 
 .margin-top-0 {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
 
 .margin-left-15 {
@@ -139,6 +155,10 @@ button:active {
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.margin-top-35 {
+    margin-top: 35px !important;
 }
 
 .padding-bottom-0 {
@@ -1118,6 +1138,7 @@ label.error {
 .emotion-textarea-div {
     background: #fff;
     padding: 15px;
+    margin-bottom: 20px;
 }
 
 .emotion-textarea-div > textarea {
@@ -1243,7 +1264,7 @@ label.error {
     display: -webkit-flex;
 }
 
-.register-container {
+.register-container, .index-container {
     min-height: 400px;
     margin-bottom: 40px;
 }
@@ -1368,4 +1389,234 @@ label.error {
     height: 100%;
     position: absolute;
     display: none;
+}
+
+.emotion-content-div:first-child {
+    margin-top: 0;
+}
+
+.wangEditor-menu-container .menu-group {
+    padding: 0 4px !important;
+}
+
+.wangEditor-menu-container .menu-group:last-child {
+    border-right: none;
+}
+
+.background-cover-div {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1999;
+    display: none;
+}
+
+.background-progress-div {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    z-index: 2999;
+    width: 250px;
+    margin-top: -50px;
+    margin-left: -125px;
+    text-align: center;
+    padding: 50px 0;
+    border: 1px solid #337ab7;
+    box-shadow: 0 0 8px 0 #337ab7;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: none;
+}
+
+.load-dot-1 {
+    opacity: 0;
+    animation: dot1 2s infinite step-start;
+    -webkit-animation: dot1 2s infinite step-start;
+}
+
+.load-dot-2 {
+    opacity: 0;
+    animation: dot2 2s infinite step-start;
+    -webkit-animation: dot2 2s infinite step-start;
+}
+
+.load-dot-3 {
+    opacity: 0;
+    animation: dot3 2s infinite step-start;
+    -webkit-animation: dot3 2s infinite step-start;
+}
+
+@keyframes dot1 {
+    0%, 100% {
+        opacity: 0;
+    }
+    25%, 50%, 75% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot2 {
+    0%, 25%, 100% {
+        opacity: 0;
+    }
+    50%, 75% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot3 {
+    0%, 25%, 50%, 100% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes dot1 {
+    0%, 100% {
+        opacity: 0;
+    }
+    25%, 50%, 75% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes dot2 {
+    0%, 25%, 100% {
+        opacity: 0;
+    }
+    50%, 75% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes dot3 {
+    0%, 25%, 50%, 100% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+}
+
+.dark-background {
+    background-color: #333333;
+    opacity: 0.25;
+}
+
+.index-image-outer {
+    border: 2px solid #eee;
+    text-align: center;
+}
+
+.index-music-next {
+    margin-right: 15px;
+}
+
+.index-music-mute {
+    margin-left: 15px;
+}
+
+.register-birthday-div {
+    padding: 0 15px !important;
+}
+
+.background-white {
+    background-color: #fff !important;
+}
+
+.article-top-container {
+    min-height: 200px;
+}
+
+.article-top-div {
+    padding: 40px 30px;
+}
+
+.article-image-div {
+    border: 2px solid #eee;
+    text-align: center;
+}
+
+.article-max {
+    cursor: pointer;
+    color: #337ab7;
+}
+
+.article-min {
+    display: none;
+    cursor: pointer;
+    color: #337ab7;
+}
+
+.article-max:hover, .article-min:hover {
+    color: #23527c;
+}
+
+.margin-15-0 {
+    margin: 15px 0;
+}
+
+.font-weight-normal {
+    font-weight: 500;
+}
+
+.article-type-select {
+    width: 150px;
+    display: inline-block;
+}
+
+.article-label-110 {
+    padding-left: 0 !important;
+    width: 110px;
+}
+
+.article-label-70 {
+    padding-left: 0 !important;
+    width: 70px;
+}
+
+.article-label-90 {
+    padding-left: 0 !important;
+    width: 90px;
+}
+
+.article-checkbox {
+    margin-left: 10px !important;
+    width: 15px;
+    height: 15px;
+}
+
+.emotion-content {
+    height: 140px;
+    padding: 10px;
+}
+
+.emoji-div {
+    position: absolute;
+    border: 1px solid #ddd;
+    background: #fff;
+    display: none;
+    width: 100%;
+}
+
+.emoji-tab-content {
+    height: 160px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.emotion-goal-div {
+    background: #fff;
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+.emotion-goal-span {
+    display: inline-block;
+    width: 42px;
 }

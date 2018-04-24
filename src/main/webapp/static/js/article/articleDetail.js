@@ -1,10 +1,19 @@
 var articleDetail = {
-    init: {
-        replyId: ''
+    init: function () {
+        $('#articleMax').click(function(){
+            $('#articleWindow').removeClass("col-sm-8");
+            $('#otherWindow, #articleMax').hide();
+            $('#articleMin').show();
+        });
+        $('#articleMin').click(function(){
+            $('#articleWindow').addClass("col-sm-8");
+            $('#articleMin').hide();
+            $('#otherWindow, #articleMax').show();
+        });
     },
     detail: {
         saveComment: function () {
-            _alert('提示','评论功能暂未开启');
+            _alert('提示', '评论功能暂未开启');
             return;
             var comment = $('#reply').val();
             if (comment == null || comment.replace(/(^\s+)|(\s+$)/g, "") == '') {
@@ -23,7 +32,7 @@ var articleDetail = {
                     comment: comment,
                     userId: _userId,
                     blogId: _blogId,
-                    parentId: articleDetail.init.replyId
+                    parentId: articleDetail.param.replyId
                 },
                 dataType: 'json',
                 success: function (result) {
@@ -42,10 +51,10 @@ var articleDetail = {
         reply: function (num, name, id) {
             location.href = '#reply';
             if (typeof(id) == 'undefined') {
-                articleDetail.init.replyId = '';
+                articleDetail.param.replyId = '';
                 $('#replyTo').html('');
             } else {
-                articleDetail.init.replyId = id;
+                articleDetail.param.replyId = id;
                 var str = '<div class="alert alert-default" role="alert">';
                 str += '<p>回复 ' + name + '  #' + num + ' ：</p></div>';
                 $('#replyTo').html(str);
@@ -112,5 +121,8 @@ var articleDetail = {
                 }
             });
         }
+    },
+    param: {
+        replyId: ''
     }
 }

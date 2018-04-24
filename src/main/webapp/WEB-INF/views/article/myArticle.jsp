@@ -8,8 +8,8 @@
 </head>
 <body>
 <%@ include file="../common/top.jsp" %>
-<div class="container" style="min-height: 200px;">
-    <div class="full-width overflow-block" style="padding: 40px 30px;">
+<div class="container article-top-container">
+    <div class="full-width overflow-block article-top-div">
         <img src="/static/upload/img/l/${all.user.avatar }" class="top-info-img">
         <div class="top-info-div">
             <h2>${all.user.nickname }</h2>
@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="container" style="min-height: 400px;; margin-bottom: 40px;">
+<div class="container index-container">
     <div class="col-sm-8 col-xs-12">
         <div class="full-width overflow-block">
             <ul id="myTab" class="nav nav-tabs">
@@ -34,7 +34,7 @@
                 <li class="blog-favorite">
                     <a href="${path }/article/${all.userId }?t=f" class="diary-types">我的收藏</a>
                 </li>
-                <li style="float: right;">
+                <li class="pull-right">
                     <a href="${path }/articleDo/mark" class="diary-types">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         <span class="hidden-xs"> 写博客</a>
@@ -79,7 +79,7 @@
                                                 <div class="overflow-block">
                                                     <c:forEach var="image" items="${fn:split(blog.thumb, '|||')}">
                                                         <div class="col-sm-4 hidden-xs padding-left-0">
-                                                            <div class="index-image-outer" style="border:2px solid #eee;text-align: center;">
+                                                            <div class="index-image-outer article-image-div">
                                                                 <img src="${image }">
                                                             </div>
                                                         </div>
@@ -108,17 +108,17 @@
                 </div>
 
             </div>
-            <div style="text-align: center;">
+            <div class="text-center">
                 <c:choose>
                     <c:when test="${all.articles.totalNo == 1 || all.articles.totalNo == 0 }">
-                        <ul class="pagination" style="text-align: center;">
+                        <ul class="pagination text-center">
                             <li class="disabled"><a href="#">&lt;</a></li>
                             <li class="active disabled"><a href="#">1</a></li>
                             <li class="disabled"><a href="#">&gt;</a></li>
                         </ul>
                     </c:when>
                     <c:when test="${all.articles.totalNo == 2 }">
-                        <ul class="pagination" style="text-align: center;">
+                        <ul class="pagination text-center">
                             <c:choose>
                                 <c:when test="${all.articles.pageNo == 1 }">
                                     <li class="disabled"><a href="#">&lt;</a></li>
@@ -138,7 +138,7 @@
                         </ul>
                     </c:when>
                     <c:when test="${all.articles.totalNo == 3 }">
-                        <ul class="pagination" style="text-align: center;">
+                        <ul class="pagination text-center">
                             <c:choose>
                                 <c:when test="${all.articles.pageNo == 1 }">
                                     <li class="disabled"><a href="#">&lt;</a></li>
@@ -167,7 +167,7 @@
                         </ul>
                     </c:when>
                     <c:otherwise>
-                        <ul class="pagination" style="text-align: center;">
+                        <ul class="pagination text-center">
                             <c:choose>
                                 <c:when test="${all.articles.pageNo == 1 }">
                                     <li class="disabled"><a href="#">&lt;</a></li>
@@ -227,7 +227,7 @@
         </div>
     </div>
     <div class="col-sm-4 col-xs-12">
-        <div class="index-right-block" style="margin-top: 35px;">
+        <div class="index-right-block margin-top-35">
             <span>日志分类</span>
             <ul class="last-blog">
                 <c:forEach var="type" items="${all.types }">
@@ -243,7 +243,7 @@
                 </c:forEach>
             </ul>
         </div>
-        <div class="index-right-block" style="margin-top: 35px;">
+        <div class="index-right-block margin-top-35">
             <span>最近日志</span>
             <ul class="last-blog">
                 <c:if test="${all.newArticles.datalist == null }">
@@ -254,7 +254,7 @@
                 </c:forEach>
             </ul>
         </div>
-        <div class="index-right-block" style="margin-top: 35px;">
+        <div class="index-right-block margin-top-35">
             <span>大家在看</span>
             <ul class="last-blog">
                 <c:if test="${all.viewArticles.datalist == null }">

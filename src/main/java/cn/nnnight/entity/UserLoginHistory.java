@@ -13,6 +13,7 @@ public class UserLoginHistory {
     private int userId;
     private Date loginTime;
     private String loginIp;
+    private String loginStatus;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -53,4 +54,12 @@ public class UserLoginHistory {
         this.loginIp = loginIp;
     }
 
+    @Column(name = "LOGIN_STATUS")
+    public String getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(String loginStatus) {
+        this.loginStatus = loginStatus;
+    }
 }

@@ -30,6 +30,7 @@ public class ArticleController {
                               @RequestParam(value = "n", defaultValue = "1") Integer pageNo,
                               @RequestParam(value = "s", defaultValue = "10") Integer pageSize, HttpSession session) {
         ModelAndView mv = new ModelAndView();
+        type = fmtType(type);
         if (AuthUtil.getUserId() == userId) {
             mv.setViewName("article/myArticle");
             mv.addObject("type", type);
@@ -53,5 +54,16 @@ public class ArticleController {
         mv.addObject(Constants.IS_SELF, AuthUtil.getUserId() == vo.getUserId());
         session.setAttribute(Constants.WHOLE_USER_ID, vo.getUserId());
         return mv;
+    }
+
+    private String fmtType(String type) {
+        boolean flag1 = !Constants.DRAFTDIARY.equals(type) && !Constants.FAVORABLEDIARY.equals(type);
+        boolean flag2 = !Constants.PRIVATEDIARY.equals(type) && !Constants.MYDIARY.equals(type);
+        if (flag1 && flag2) {
+            return Constants.MYDIARY;
+        } else {
+            return type;
+        }
+
     }
 }

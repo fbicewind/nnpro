@@ -58,9 +58,9 @@
 					</div>
 					<div class="form-group">
 						<label for="birthday" class="col-sm-3 control-label">生日&nbsp;&nbsp;&nbsp;</label>
-						<div class="input-group date form_date col-sm-8" data-date-format="yyyy-mm-dd" style="padding:0 15px;">
-		                    <input class="form-control" size="16" type="text" id="birthday" name="birthday" readonly="readonly" style="background-color:#fff;">
-							<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+						<div class="input-group date form_date col-sm-8 register-birthday-div" data-date-format="yyyy-mm-dd">
+		                    <input class="form-control background-white" size="16" type="text" id="birthday" name="birthday" readonly="readonly">
+							<span class="input-group-addon background-white"><span class="fa fa-calendar"></span></span>
 		                </div>
 					</div>
 					<div class="form-group">

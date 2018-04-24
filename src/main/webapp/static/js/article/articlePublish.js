@@ -16,7 +16,7 @@ var articlePublish = {
                     'strikethrough', 'forecolor', 'bgcolor', 'fontfamily',
                     'fontsize', 'head', '|', 'unorderlist', 'orderlist',
                     'alignleft', 'aligncenter', 'alignright', '|', 'link',
-                    'table', 'emotion', 'img', 'fullscreen'];
+                    'table', 'emotion', 'img', 'fullscreen', 'insertcode'];
             } else {
                 editor.config.menus = ['head', 'alignleft',
                     'aligncenter', 'alignright', 'link', 'emotion', 'img',
@@ -47,6 +47,7 @@ var articlePublish = {
                 alert('请输入标题');
                 return;
             }
+            _openProgress();
             var content = editor.$txt.html();
             var thumb = '';
             //匹配图片（g表示匹配所有结果i表示区分大小写）
@@ -85,6 +86,7 @@ var articlePublish = {
                 },
                 dataType: 'json',
                 success: function (result) {
+                    _closeProgress();
                     window.location.href = _path + '/article/detail/' + result.data.id;
                 }
             });

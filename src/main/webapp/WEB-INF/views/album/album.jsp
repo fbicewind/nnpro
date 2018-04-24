@@ -12,11 +12,11 @@
 		<div class="album-container">
 			<c:if test="${self }">
 				<div class="album-button-div">
-					<button class="btn btn-default" style="margin-right: 20px;" data-toggle="modal" onclick="album.detail.toUploadPhotos()">上传照片</button>
+					<button class="btn btn-default margin-right-20" data-toggle="modal" onclick="album.detail.toUploadPhotos()">上传照片</button>
 					<button class="btn btn-default" data-toggle="modal" data-target="#createAlbumModal">创建相册</button>
 				</div>
 			</c:if>
-			<div style="overflow: hidden;">
+			<div class="overflow-block">
 				<c:forEach var="album" items="${albumList }">
 					<div class="col-xs-12 col-sm-4 col-md-3 album-box">
 						<div class="album-s-box">

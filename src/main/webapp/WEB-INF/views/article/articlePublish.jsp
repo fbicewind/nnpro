@@ -14,8 +14,8 @@
 </head>
 <body>
 	<%@ include file="../common/top.jsp"%>
-	<div class="container" style="min-height: 200px;">
-		<div class="full-width overflow-block" style="padding: 40px 30px;">
+	<div class="container article-top-container">
+		<div class="full-width overflow-block article-top-div">
 			<img src="/static/upload/img/l/${all.user.avatar }" class="top-info-img">
 			<div class="top-info-div">
 				<h2>${all.user.nickname }</h2>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-	<div class="container" style="min-height: 400px; margin-bottom: 40px;">
+	<div class="container index-container">
 		<input type="hidden" id="_blogDetail" value="${fn:escapeXml(all.article.content)}">
 		<div class="col-sm-8 col-xs-12">
 			<form role="form" id="newBlog">
@@ -34,10 +34,10 @@
 				</div>
 				<div id="wEditor">
 				</div>
-				<div style="margin:15px 0;">
+				<div class="margin-15-0">
 					<div class="form-group">
-	    				<label for="type" class="form-label" style="font-weight: 500;">分类：</label>
-	    				<select class="form-control" id="type" style="width:150px;display: inline-block;">
+	    				<label for="type" class="form-label font-weight-normal">分类：</label>
+	    				<select class="form-control article-type-select" id="type">
 							<c:forEach var="type" items="${all.types }">
 								<c:choose>
 		    						<c:when test="${all.article.typeId == type.id }">
@@ -49,53 +49,53 @@
 		    					</c:choose>
 							</c:forEach>
 						</select>
-						<a style="cursor: pointer;" data-toggle="modal" data-target="#myModal">添加分类</a>
+						<a class="hover-pointer" data-toggle="modal" data-target="#myModal">添加分类</a>
 	  				</div>
 	  				<div class="checkbox">
-						<label style="padding-left: 0;width: 110px;">
+						<label class="article-label-110">
 							仅自己可见
 							<c:choose>
 								<c:when test="${all.article.publicFlag == 'N' }">
-									<input id="isPublic" type="checkbox" style="margin-left: 10px;width:15px;height:15px;" checked> 
+									<input id="isPublic" type="checkbox" class="article-checkbox" checked>
 								</c:when>
 								<c:otherwise>
-									<input id="isPublic" type="checkbox" style="margin-left: 10px;width:15px;height:15px;"> 
+									<input id="isPublic" type="checkbox" class="article-checkbox">
 								</c:otherwise>
 							</c:choose>
 						</label>
-						<label style="padding-left: 0;width: 70px;">
+						<label class="article-label-70">
 							置顶
 							<c:choose>
 								<c:when test="${all.article.topFlag == 'Y' }">
-									<input id="isTop" type="checkbox" style="margin-left: 10px;width:15px;height:15px;" checked>
+									<input id="isTop" type="checkbox" class="article-checkbox" checked>
 								</c:when>
 								<c:otherwise>
-									<input id="isTop" type="checkbox" style="margin-left: 10px;width:15px;height:15px;">
+									<input id="isTop" type="checkbox" class="article-checkbox">
 								</c:otherwise>
 							</c:choose>
 						</label>
-						<label style="padding-left: 0;width: 90px;">
+						<label class="article-label-90">
 							首页推荐
 							<c:choose>
 								<c:when test="${all.article.recommendFlag == 'Y' }">
-									<input id="isRecommend" type="checkbox" style="margin-left: 10px;width:15px;height:15px;" checked>
+									<input id="isRecommend" type="checkbox" class="article-checkbox" checked>
 								</c:when>
 								<c:otherwise>
-									<input id="isRecommend" type="checkbox" style="margin-left: 10px;width:15px;height:15px;">
+									<input id="isRecommend" type="checkbox" class="article-checkbox">
 								</c:otherwise>
 							</c:choose>
 						</label>
 					</div>
 				</div>
 				<div class="form-group">
-					<button type="button" class="btn btn-primary"  onclick="articlePublish.detail.submitBlog()" style="margin-right:5px;">&nbsp;发&nbsp;&nbsp;&nbsp;&nbsp;表&nbsp;</button>
+					<button type="button" class="btn btn-primary margin-right-5"  onclick="articlePublish.detail.submitBlog()">&nbsp;发&nbsp;&nbsp;&nbsp;&nbsp;表&nbsp;</button>
 					<button type="button" class="btn btn-default" onclick="articlePublish.detail.cancelBlog()">&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;</button>
-					<button style="float: right;" type="button" class="btn btn-default" onclick="articlePublish.detail.saveDraft()">保存草稿</button>
+					<button type="button" class="btn btn-default right-tag" onclick="articlePublish.detail.saveDraft()">保存草稿</button>
 				</div>
 			</form>
 		</div>
 		<div class="col-sm-4 col-xs-12">
-			<div class="index-right-block" style="margin-top: 0px;">
+			<div class="index-right-block margin-top-0">
 				<span>日志分类</span>
 				<ul class="last-blog">
 					<c:forEach var="type" items="${all.types }">
@@ -103,7 +103,7 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="index-right-block" style="margin-top: 35px;">
+			<div class="index-right-block margin-top-35">
 				<span>最近日志</span>
 				<ul class="last-blog">
 					<c:if test="${all.newArticles.datalist == null }">
@@ -114,7 +114,7 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="index-right-block" style="margin-top: 35px;">
+			<div class="index-right-block margin-top-35">
 				<span>大家在看</span>
 				<ul class="last-blog">
 					<c:if test="${all.viewArticles.datalist == null }">

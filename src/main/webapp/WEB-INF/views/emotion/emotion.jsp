@@ -11,17 +11,17 @@
     <div class="col-sm-8 col-xs-12">
         <c:if test="${self}">
             <div class="emotion-textarea-div">
-                <div id="emotionContent" contenteditable="true" style="height: 140px;padding: 10px;"></div>
+                <div id="emotionContent" class="emotion-content" contenteditable="true"></div>
                 <div>
                     <i class="fa fa-smile-o fa-lg" aria-hidden="true" id="emotionIcon"></i>
-                    <div id="emojiDiv" style="position: absolute;border: 1px solid #ddd;background: #fff;display: none;width: 100%;">
-                        <div id="myTabContent" class="tab-content" style="height: 160px;width: 100%;overflow-y: scroll;">
+                    <div id="emojiDiv" class="emoji-div">
+                        <div id="myTabContent" class="tab-content emoji-tab-content">
                             <div class="tab-pane fade in active" id="defaultTab"></div>
                             <div class="tab-pane fade" id="moodTab"></div>
                             <div class="tab-pane fade" id="weatherTab"></div>
                             <div class="tab-pane fade" id="foxTab"></div>
                         </div>
-                        <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 0;">
+                        <ul id="myTab" class="nav nav-tabs margin-bottom-0">
                             <li class="active"><a href="#defaultTab" data-toggle="tab">默认</a></li>
                             <li><a href="#moodTab" data-toggle="tab">心情</a></li>
                             <li><a href="#weatherTab" data-toggle="tab">天气</a></li>
@@ -40,15 +40,15 @@
         <div id="emotions"></div>
     </div>
     <div class="col-sm-4 col-xs-12 emotion-right-panel">
-        <div style="background: #fff;overflow: hidden;padding:15px 0;">
+        <div class="emotion-goal-div">
             <div class="emotion-personal-info">
                 <div class="col-md-4 col-sm-12">
                     <img src="/static/upload/img/m/${user.avatar }" class="full-width">
                 </div>
                 <div class="col-md-8 col-sm-12">
                     <ul>
-                        <li><span style="display: inline-block;width: 42px;">昵&nbsp;&nbsp;称</span>：${user.nickname }</li>
-                        <li><span style="display: inline-block;width: 42px;">GOAL</span>：<span id="goalState">未设置</span></li>
+                        <li><span class="emotion-goal-span">昵&nbsp;&nbsp;称</span>：${user.nickname }</li>
+                        <li><span class="emotion-goal-span">GOAL</span>：<span id="goalState">未设置</span></li>
                     </ul>
                 </div>
             </div>

@@ -21,4 +21,8 @@ public interface UserService {
     public Integer modifyPassword(String password, String oldPassword);
 
     public List<WorkExperienceVo> findAllExperience();
+
+    public void addVisitHistory(String ip, int userId);
+
+    public void addLoginHistory(String ip, int userId, String status);
 }

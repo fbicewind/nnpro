@@ -7,9 +7,9 @@
 </head>
 <body>
 <%@ include file="common/top.jsp"%>
-<div class="banner" style="margin-bottom: 40px;"></div>
-<div class="container" style="min-height: 400px; margin-bottom: 40px;">
-    <div class="col-sm-8 col-xs-12" style="margin-bottom: 20px;">
+<div class="banner margin-bottom-40"></div>
+<div class="container index-container">
+    <div class="col-sm-8 col-xs-12 margin-bottom-20">
         <div class="full-width overflow-block">
             <ul>
                 <c:if test="${all.articles.totalSize == 0 }">
@@ -27,7 +27,7 @@
                                 <div class="overflow-block">
                                     <c:forEach var="image" items="${fn:split(blog.thumb, '|||')}">
                                         <div class="col-sm-4 hidden-xs padding-left-0">
-                                            <div class="index-image-outer" style="border:2px solid #eee;text-align: center;">
+                                            <div class="index-image-outer">
                                                 <img src="${image }">
                                             </div>
                                         </div>
@@ -40,7 +40,7 @@
 								<span>
 									<i class="fa fa-clock-o" aria-hidden="true"></i>
 									<fmt:formatDate value="${blog.createTime }" pattern="yyyy-MM-dd HH:mm:ss" />
-								</span>&nbsp;&nbsp;&nbsp;&nbsp; <span>分类：<a href="#">${blog.articleType }</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+								</span>&nbsp;&nbsp;&nbsp;&nbsp; <span>分类：<a href="${path}/article/${all.user.id}?i=${blog.typeId}">${blog.articleType }</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
                             <span>浏览量：${blog.readCount }</span>
                         </div>
                     </li>
@@ -87,8 +87,8 @@
                         <h5></h5>
                     </div>
                     <div class="index-music-operation" id="ntMusicOper">
-                        <i class="fa fa-step-forward fa-2x" aria-hidden="true" style="margin-right:15px;" id="ntMusicNext"></i>
-                        <i class="fa fa-volume-up fa-2x" aria-hidden="true" style="margin-left: 15px;" id="ntMusicMute"></i>
+                        <i class="fa fa-step-forward fa-2x index-music-next" aria-hidden="true" id="ntMusicNext"></i>
+                        <i class="fa fa-volume-up fa-2x index-music-mute" aria-hidden="true" id="ntMusicMute"></i>
                     </div>
                 </div>
             </div>
@@ -105,35 +105,6 @@
                 </c:forEach>
             </ul>
         </div>
-        <%--<div class="index-right-block">--%>
-            <%--<span>最近访客</span>--%>
-            <%--<div class="overflow-block">--%>
-                <%--<c:if test="${visitors.datalist == null }">--%>
-                    <%--<div>&nbsp;&nbsp;&nbsp;&nbsp;暂无访客..</div>--%>
-                <%--</c:if>--%>
-                <%--<c:choose>--%>
-                    <%--<c:when test="${self }">--%>
-                        <%--<c:forEach var="visitor" items="${visitors.datalist }">--%>
-                            <%--<div class="index-visitor">--%>
-                                <%--<a href="#"> <i class="fa fa-remove visitor-remove"--%>
-                                                <%--aria-hidden="true"></i> <img src="${path }/static/image/photos2.jpg">--%>
-                                    <%--<div class="visitor-name">小马哥</div>--%>
-                                <%--</a>--%>
-                            <%--</div>--%>
-                        <%--</c:forEach>--%>
-                    <%--</c:when>--%>
-                    <%--<c:otherwise>--%>
-                        <%--<c:forEach var="visitor" items="${visitors.datalist }">--%>
-                            <%--<div class="index-visitor">--%>
-                                <%--<a href="#"> <img src="${path }/static/image/photos2.jpg">--%>
-                                    <%--<div class="visitor-name">小马哥</div>--%>
-                                <%--</a>--%>
-                            <%--</div>--%>
-                        <%--</c:forEach>--%>
-                    <%--</c:otherwise>--%>
-                <%--</c:choose>--%>
-            <%--</div>--%>
-        <%--</div>--%>
     </div>
 </div>
 
